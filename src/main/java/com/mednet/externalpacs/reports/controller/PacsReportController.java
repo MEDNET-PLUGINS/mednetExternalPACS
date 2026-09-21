@@ -2,13 +2,11 @@ package com.mednet.externalpacs.reports.controller;
 
 import com.mednet.externalpacs.common.util.APIErrorCodes;
 import com.mednet.externalpacs.common.util.APIResponseEntityUtil;
-import com.mednet.externalpacs.reports.dto.sendToMednet.ReportHeader;
 import com.mednet.externalpacs.reports.service.PacsReports;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,10 +39,5 @@ public class PacsReportController {
                     APIErrorCodes.ERR_CODE_SOMETHING_WENT_WRONG,
                     e.getMessage());
         }
-    }
-
-    @GetMapping("/mednet-report-structure")
-    public String pullReportPayload() {
-        return new ReportHeader().toString();
     }
 }
