@@ -14,7 +14,7 @@
     <groupId>com.mednet</groupId>
     <artifactId>mednetExternalPACS</artifactId>
     <version>M2.27</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>mednetExternalPACS</name>
     <description>External PACS ORU report receiver</description>
 
@@ -22,19 +22,12 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
-        <jetty.version>9.4.54.v20240208</jetty.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -44,11 +37,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -69,7 +57,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <skip>${spring-boot.repackage.skip}</skip>
                     <mainClass>com.mednet.externalpacs.common.ExternalPacsApplication</mainClass>
                 </configuration>
                 <executions>
@@ -80,37 +67,9 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-                <configuration>
-                    <httpConnector>
-                        <port>9991</port>
-                    </httpConnector>
-                    <webApp>
-                        <contextPath>/mednetExternalPACS</contextPath>
-                    </webApp>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>exec-war</id>
-            <properties>
-                <spring-boot.repackage.skip>false</spring-boot.repackage.skip>
-            </properties>
-        </profile>
-    </profiles>
     <repositories>
         <repository>
             <id>central_25</id>

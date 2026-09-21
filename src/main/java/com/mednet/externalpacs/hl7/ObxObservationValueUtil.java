@@ -1,7 +1,5 @@
 package com.mednet.externalpacs.hl7;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
