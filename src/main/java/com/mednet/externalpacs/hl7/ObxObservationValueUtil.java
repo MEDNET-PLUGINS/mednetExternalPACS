@@ -14,10 +14,6 @@ public final class ObxObservationValueUtil {
 
     private static final Pattern HEX_ESCAPE = Pattern.compile("\\\\X([0-9A-Fa-f]{2})\\\\");
 
-    private static final Pattern HTML_MARKUP = Pattern.compile(
-            "<\\s*(!doctype\\s+html|html|head|body|table|div|span|p|br|font|pre|h[1-6]|ul|ol|li)\\b[^>]*>",
-            Pattern.CASE_INSENSITIVE);
-
     private ObxObservationValueUtil() {
     }
 
@@ -71,20 +67,9 @@ public final class ObxObservationValueUtil {
         result = result.replace("\\E\\", "\\");  // escape char itself (do this last)
 
         result = decodeGenericHexEscapes(result);
-
-        // Vendors such as Fuji / FenixPACS put a full HTML report in OBX-5. Escaping that markup
-        // would store the tags as visible text, so only plain report text is escaped.
-        if (isHtml(result)) {
-            return result.trim();
-        }
-
         result = StringEscapeUtils.escapeHtml(result);
         result = result.replace("\n", "<br>");
         return result;
-    }
-
-    private static boolean isHtml(String value) {
-        return HTML_MARKUP.matcher(value).find();
     }
 
     private static String decodeGenericHexEscapes(String value) {
