@@ -66,8 +66,6 @@ public final class ObxObservationValueUtil {
         result = result.replace("\\R\\", "~");   // repetition separator
         result = result.replace("\\E\\", "\\");  // escape char itself (do this last)
 
-        result = decodeGenericHexEscapes(result);
-        result = StringEscapeUtils.escapeHtml(result);
         result = result.replace("\n", "<br>");
         return result;
     }
