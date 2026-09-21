@@ -83,7 +83,7 @@ public class FujiPacsReceiver extends AbstractPacsReportReceiver implements Pacs
     private void mapObx(Hl7Segment obx, PACSDiagnosticsReport report) {
         String rawValue = StringUtils.firstNonBlank(obx.field(5), obx.field(6));
         //String value = ObxObservationValueUtil.normalize(rawValue, obx.getEncoding()); Normalization not required
-        String value = ObxObservationValueUtil.normalize(rawValue, obx.getEncoding());
+        String value = rawValue;
         if (StringUtils.isNotBlank(value)) {
             report.setObxObservationValue(ObxObservationValueUtil.append(report.getObxObservationValue(), value));
         }
